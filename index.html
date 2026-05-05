@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Energi Masa Depan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0f172a;
+            overflow-x: hidden;
+        }
+
+        /* Background Animasi Futuristik */
+        .animated-bg {
+            background: linear-gradient(-45deg, #0f172a, #1e293b, #1e40af, #1e3a8a);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .card-glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .input-glow:focus {
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+            border-color: #3b82f6;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .sample-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .sample-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+
+        .microscope-view {
+            background: radial-gradient(circle, #ffffff 0%, #cbd5e1 100%);
+            border: 8px solid #1e293b;
+            position: relative;
+        }
+
+        .btn-futuristic {
+            background: linear-gradient(90deg, #2563eb, #3b82f6);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-futuristic:hover {
+            filter: brightness(1.1);
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+        }
+
+        /* Scanline effect for microscope */
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(37, 99, 235, 0.3);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 20;
+            animation: scan 3s linear infinite;
+            display: none;
+        }
+
+        @keyframes scan {
+            0% { top: 0%; }
+            100% { top: 100%; }
+        }
+    </style>
+</head>
+<body class="animated-bg min-h-screen text-slate-100 flex items-center justify-center py-10">
+
+    <div id="app" class="w-full max-w-4xl mx-auto p-4">
+        
+        <!-- SEKSI 1: LOGIN FUTURISTIK -->
+        <div id="page-login" class="fade-in">
+            <div class="card-glass p-10 md:p-16 rounded-[40px] text-center relative overflow-hidden border border-white/10">
+                <div class="absolute -top-24 -left-24 w-64 h-64 bg-blue-600/20 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-purple-600/20 rounded-full blur-3xl"></div>
+                
+                <div class="relative z-10">
+                    <div class="w-24 h-24 bg-gradient-to-tr from-blue-600 to-cyan-400 rounded-3xl flex items-center justify-center mx-auto mb-8 rotate-12 shadow-2xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white -rotate-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    
+                    <h1 class="text-4xl md:text-5xl font-black mb-2 tracking-tight text-white">
+                        LAB ENERGI <span class="text-blue-400">MASA DEPAN</span>
+                    </h1>
+                    <p class="text-slate-400 mb-10 text-lg">Platform Edukasi Energi Terbarukan untuk Siswa Hebat</p>
+                    
+                    <div class="space-y-5 max-w-sm mx-auto">
+                        <div class="text-left">
+                            <label class="text-xs font-bold text-blue-400 uppercase tracking-widest ml-1">Nama Ilmuwan</label>
+                            <input type="text" id="student-name" placeholder="Siapa namamu?" 
+                                class="w-full bg-slate-800/50 px-6 py-4 rounded-2xl border border-slate-700 focus:ring-2 focus:ring-blue-500 outline-none transition-all input-glow text-white mt-1">
+                        </div>
+                        
+                        <div class="text-left">
+                            <label class="text-xs font-bold text-blue-400 uppercase tracking-widest ml-1">Kelas</label>
+                            <input type="text" id="student-class" placeholder="Kelas berapa?" 
+                                class="w-full bg-slate-800/50 px-6 py-4 rounded-2xl border border-slate-700 focus:ring-2 focus:ring-blue-500 outline-none transition-all input-glow text-white mt-1">
+                        </div>
+                        
+                        <button onclick="goToVideo()" class="w-full btn-futuristic text-white font-bold py-5 rounded-2xl shadow-xl mt-4 text-lg">
+                            MULAI EKSPEDISI
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEKSI 2: DOKUMEN PERMASALAHAN -->
+        <div id="page-video" class="hidden fade-in">
+            <div class="card-glass p-8 rounded-3xl shadow-xl">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold text-blue-400 uppercase tracking-tighter">Misi: Analisis Krisis</h2>
+                    <span id="display-name" class="text-xs font-bold bg-blue-500/20 px-4 py-2 rounded-full text-blue-300"></span>
+                </div>
+                
+                <!-- Pemutar Video ee.mp4 -->
+                <div class="w-full aspect-video bg-black rounded-3xl overflow-hidden mb-6 border border-slate-700 shadow-[0_0_20px_rgba(59,130,246,0.2)]">
+                    <video controls class="w-full h-full object-cover">
+                        <source src="ee.mp4" type="video/mp4">
+                        Maaf, browser Anda tidak mendukung pemutaran video HTML5.
+                    </video>
+                </div>
+
+                <!-- Kotak Analisis Misi -->
+                <div class="bg-red-900/20 border-l-4 border-red-500 p-6 rounded-r-2xl mb-8 relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 text-7xl opacity-5">⚠️</div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="text-xl">⚠️</span>
+                        <h4 class="text-red-400 font-bold uppercase tracking-widest text-sm">Analisis Misi</h4>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed italic">
+                        "Laporan Kota yang Gelap Energi fosil kita menipis dan udara mulai tercemar asap hitam. Kami butuh ilmuwan baru untuk solusi energi bersih,masuk kesimulasi dan cari solusinya!"
+                    </p>
+                </div>
+
+                <button onclick="goToLab()" class="w-full btn-futuristic text-white font-bold py-4 rounded-2xl transition-all shadow-xl">
+                    MASUK LABORATORIUM ANALISIS
+                </button>
+            </div>
+        </div>
+
+        <!-- SEKSI 3: LABORATORIUM ILMUWAN -->
+        <div id="page-lab" class="hidden fade-in">
+            <div class="card-glass p-8 rounded-[40px] shadow-xl flex flex-col">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-black text-white">🔬 MEJA EKSPERIMEN</h2>
+                    <p class="text-slate-400 text-sm">Pilih sampel material di bawah untuk dianalisis melalui mikroskop</p>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                    <!-- Sampel Batu Bara -->
+                    <div onclick="showDetail('Batu Bara', 'Berasal dari fosil tumbuhan jutaan tahun lalu. Sangat panas saat dibakar namun menghasilkan asap beracun (karbon).', '🔴 TIDAK TERBARUKAN', 'https://images.unsplash.com/photo-1517089152318-42ec560349c0?auto=format&fit=crop&w=600&q=80')" class="sample-card bg-slate-800/50 p-3 rounded-2xl border border-slate-700">
+                        <img src="https://images.unsplash.com/photo-1517089152318-42ec560349c0?auto=format&fit=crop&w=300&q=80" alt="Batu Bara" class="w-full h-24 object-cover rounded-xl mb-2 opacity-80">
+                        <p class="text-center font-bold text-[10px] tracking-widest uppercase text-red-400">Batu Bara</p>
+                    </div>
+                    
+                    <!-- Sampel Minyak Bumi -->
+                    <div onclick="showDetail('Minyak Bumi', 'Cairan hitam kental dari perut bumi. Digunakan untuk bensin dan plastik. Mengeluarkan gas rumah kaca saat digunakan.', '🔴 TIDAK TERBARUKAN', 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80')" class="sample-card bg-slate-800/50 p-3 rounded-2xl border border-slate-700">
+                        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=300&q=80" alt="Kilang Minyak Bumi" class="w-full h-24 object-cover rounded-xl mb-2 opacity-80">
+                        <p class="text-center font-bold text-[10px] tracking-widest uppercase text-red-400">Minyak Bumi</p>
+                    </div>
+
+                    <!-- Sampel Matahari -->
+                    <div onclick="showDetail('Energi Matahari', 'Sumber energi tanpa batas dari sinar matahari. Panel surya menyerap cahaya dan mengubahnya menjadi listrik bersih.', '🟢 TERBARUKAN', 'https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=600&q=80')" class="sample-card bg-slate-800/50 p-3 rounded-2xl border border-slate-700">
+                        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=300&q=80" alt="Panel Surya" class="w-full h-24 object-cover rounded-xl mb-2 opacity-80">
+                        <p class="text-center font-bold text-[10px] tracking-widest uppercase text-green-400">Matahari</p>
+                    </div>
+
+                    <!-- Sampel Angin -->
+                    <div onclick="showDetail('Energi Angin', 'Gerak udara alami yang memutar kincir raksasa. Tersedia gratis di alam dan tidak pernah habis.', '🟢 TERBARUKAN', 'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=600&q=80')" class="sample-card bg-slate-800/50 p-3 rounded-2xl border border-slate-700">
+                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=300&q=80" alt="Kincir Angin" class="w-full h-24 object-cover rounded-xl mb-2 opacity-80">
+                        <p class="text-center font-bold text-[10px] tracking-widest uppercase text-green-400">Angin</p>
+                    </div>
+                </div>
+
+                <!-- Bagian Analisis Mikroskop -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center bg-slate-900/80 p-8 rounded-3xl border-2 border-slate-800 shadow-2xl">
+                    <div id="microscope-display" class="microscope-view w-full aspect-square rounded-full flex items-center justify-center overflow-hidden shadow-[0_0_50px_rgba(255,255,255,0.05)]">
+                        <div class="scanline" id="scanline"></div>
+                        <div id="lab-placeholder" class="text-slate-600 text-center p-4">
+                            <span class="text-5xl block mb-2 opacity-20">🔬</span>
+                            <span class="text-[10px] uppercase font-black tracking-widest">SCAN_READY...</span>
+                        </div>
+                        <img id="analysis-img" class="hidden w-full h-full object-cover">
+                    </div>
+                    
+                    <div id="analysis-data" class="md:col-span-2 space-y-4 opacity-50">
+                        <div class="border-b border-slate-700 pb-3">
+                            <span class="text-[10px] text-blue-400 font-mono font-bold tracking-[0.2em]">SAMPEL_ID:</span>
+                            <h4 id="target-name" class="text-2xl font-black text-white uppercase mt-1">---</h4>
+                        </div>
+                        <div>
+                            <span class="text-[10px] text-blue-400 font-mono font-bold tracking-[0.2em]">KATEGORI:</span>
+                            <p id="target-status" class="text-sm font-bold mt-1 text-slate-300 italic">Klik pada salah satu sampel di atas.</p>
+                        </div>
+                        <div>
+                            <span class="text-[10px] text-blue-400 font-mono font-bold tracking-[0.2em]">HASIL_SCAN:</span>
+                            <p id="target-desc" class="text-xs leading-relaxed text-slate-400 mt-1 font-light">Mohon masukkan sampel ke dalam pemindai untuk membaca data karakteristik molekul.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="goToMission()" class="btn-futuristic text-white font-bold py-5 rounded-2xl transition-all mt-8 shadow-2xl uppercase tracking-widest text-sm">
+                    Lanjut ke Misi Simulasi 🚀
+                </button>
+            </div>
+        </div>
+
+        <!-- SEKSI 4: MISI SIMULASI -->
+        <div id="page-mission" class="hidden fade-in">
+            <div class="card-glass p-8 rounded-[40px] shadow-xl">
+                <div class="flex justify-center gap-4 mb-8">
+                    <div id="step-1-dot" class="w-10 h-10 rounded-xl border-2 border-blue-500 flex items-center justify-center font-black text-sm progress-step progress-active shadow-[0_0_15px_rgba(59,130,246,0.5)]">1</div>
+                    <div class="w-12 h-0.5 bg-slate-700 mt-5"></div>
+                    <div id="step-2-dot" class="w-10 h-10 rounded-xl border-2 border-slate-700 flex items-center justify-center font-black text-sm progress-step text-slate-600">2</div>
+                </div>
+
+                <div class="text-center mb-8">
+                    <h2 id="mission-title" class="text-3xl font-black text-white mb-2 uppercase">Misi 1: Langit Biru</h2>
+                    <p id="mission-instruction" class="text-slate-400 text-sm">Pilih 2 sumber energi yang **BERSIH** dan tidak membuat udara kota kotor karena asap.</p>
+                </div>
+
+                <div id="city-status" class="w-full h-40 bg-slate-900 rounded-[30px] mb-8 relative flex items-center justify-center overflow-hidden border border-slate-700 shadow-inner">
+                    <div class="text-8xl transition-all duration-700" id="city-emoji">🌑</div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-blue-600/10 to-transparent"></div>
+                    <div id="city-label" class="absolute bottom-4 left-0 right-0 text-center text-blue-400 text-[10px] font-mono font-bold uppercase tracking-[0.3em]">Status Kota: Offline</div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 mb-8">
+                    <button onclick="toggleChoice(this, 'coal')" class="choice-btn group p-5 border border-slate-700 rounded-3xl bg-slate-800/30 hover:bg-slate-800 transition-all flex flex-col items-center">
+                        <span class="text-4xl mb-2 group-hover:scale-110 transition-transform">🧱</span>
+                        <span class="font-bold text-[10px] tracking-widest uppercase text-slate-400">Batu Bara</span>
+                    </button>
+                    <button onclick="toggleChoice(this, 'sun')" class="choice-btn group p-5 border border-slate-700 rounded-3xl bg-slate-800/30 hover:bg-slate-800 transition-all flex flex-col items-center">
+                        <span class="text-4xl mb-2 group-hover:scale-110 transition-transform">☀️</span>
+                        <span class="font-bold text-[10px] tracking-widest uppercase text-slate-400">Matahari</span>
+                    </button>
+                    <button onclick="toggleChoice(this, 'oil')" class="choice-btn group p-5 border border-slate-700 rounded-3xl bg-slate-800/30 hover:bg-slate-800 transition-all flex flex-col items-center">
+                        <span class="text-4xl mb-2 group-hover:scale-110 transition-transform">⛽</span>
+                        <span class="font-bold text-[10px] tracking-widest uppercase text-slate-400">Minyak Bumi</span>
+                    </button>
+                    <button onclick="toggleChoice(this, 'wind')" class="choice-btn group p-5 border border-slate-700 rounded-3xl bg-slate-800/30 hover:bg-slate-800 transition-all flex flex-col items-center">
+                        <span class="text-4xl mb-2 group-hover:scale-110 transition-transform">🌬️</span>
+                        <span class="font-bold text-[10px] tracking-widest uppercase text-slate-400">Angin</span>
+                    </button>
+                </div>
+
+                <div class="flex gap-4">
+                    <button onclick="resetMission()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-white font-bold py-4 rounded-2xl transition-colors border border-slate-600">RESET</button>
+                    <button onclick="checkMissionResult()" class="flex-[2] btn-futuristic text-white font-bold py-4 rounded-2xl shadow-xl uppercase tracking-widest text-sm">AKTIFKAN SISTEM</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL HASIL -->
+        <div id="modal-result" class="fixed inset-0 bg-slate-950/90 z-50 hidden flex items-center justify-center p-6 backdrop-blur-md">
+            <div class="bg-slate-900 border border-slate-700 rounded-[40px] p-10 max-w-sm w-full text-center shadow-[0_0_100px_rgba(37,99,235,0.2)]">
+                <div id="result-icon" class="text-7xl mb-6"></div>
+                <h3 id="result-title" class="text-3xl font-black mb-3 text-white uppercase italic"></h3>
+                <p id="result-desc" class="text-slate-400 mb-8 text-sm font-light"></p>
+                <button onclick="handleModalAction()" id="result-btn" class="w-full py-4 rounded-2xl font-black uppercase tracking-widest text-sm transition-all"></button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let studentData = { name: '', class: '' };
+        let selectedEnergy = [];
+        let currentMission = 1;
+
+        function goToVideo() {
+            const name = document.getElementById('student-name').value;
+            const className = document.getElementById('student-class').value;
+            if(!name || !className) { 
+                alert("Sistem membutuhkan identitasmu!"); 
+                return; 
+            }
+            studentData.name = name;
+            studentData.class = className;
+            document.getElementById('display-name').innerText = "ILMUWAN: " + name.toUpperCase();
+            switchPage('page-login', 'page-video');
+        }
+
+        function goToLab() { switchPage('page-video', 'page-lab'); }
+        function goToMission() { switchPage('page-lab', 'page-mission'); }
+
+        function switchPage(oldId, newId) {
+            document.getElementById(oldId).classList.add('hidden');
+            document.getElementById(newId).classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function showDetail(name, desc, status, imgUrl) {
+            document.getElementById('target-name').innerText = name;
+            document.getElementById('target-status').innerText = status;
+            document.getElementById('target-desc').innerText = desc;
+            
+            const img = document.getElementById('analysis-img');
+            const placeholder = document.getElementById('lab-placeholder');
+            const scanline = document.getElementById('scanline');
+            
+            // Efek scan saat klik sampel
+            img.classList.add('hidden');
+            placeholder.classList.remove('hidden');
+            scanline.style.display = 'block';
+            
+            setTimeout(() => {
+                img.src = imgUrl;
+                img.classList.remove('hidden');
+                placeholder.classList.add('hidden');
+                scanline.style.display = 'none';
+                document.getElementById('analysis-data').classList.remove('opacity-50');
+            }, 800);
+        }
+
+        function toggleChoice(btn, type) {
+            if (selectedEnergy.includes(type)) {
+                selectedEnergy = selectedEnergy.filter(i => i !== type);
+                btn.classList.remove('border-blue-500', 'bg-blue-900/30', 'shadow-[0_0_20px_rgba(59,130,246,0.3)]');
+            } else {
+                if (selectedEnergy.length >= 2) return;
+                selectedEnergy.push(type);
+                btn.classList.add('border-blue-500', 'bg-blue-900/30', 'shadow-[0_0_20px_rgba(59,130,246,0.3)]');
+            }
+            updateCityVisual();
+        }
+
+        function updateCityVisual() {
+            const emoji = document.getElementById('city-emoji');
+            const label = document.getElementById('city-label');
+            if(selectedEnergy.length === 0) { emoji.innerText = "🌑"; label.innerText = "Status Kota: Offline"; }
+            else if(selectedEnergy.length === 1) { emoji.innerText = "🌓"; label.innerText = "Daya Terdeteksi: 50%"; }
+            else { emoji.innerText = "🏙️"; label.innerText = "Sistem Optimal: 100%"; }
+        }
+
+        function checkMissionResult() {
+            if (selectedEnergy.length < 2) { 
+                alert("Pilih minimal 2 sumber energi!"); 
+                return; 
+            }
+
+            const modal = document.getElementById('modal-result');
+            const icon = document.getElementById('result-icon');
+            const title = document.getElementById('result-title');
+            const desc = document.getElementById('result-desc');
+            const btn = document.getElementById('result-btn');
+
+            if (currentMission === 1) {
+                // Misi 1: Mencari Energi Terbarukan (Bersih)
+                if (selectedEnergy.includes('sun') && selectedEnergy.includes('wind')) {
+                    icon.innerText = "✅";
+                    title.innerText = "BERHASIL";
+                    desc.innerText = "Luar biasa! Matahari dan Angin adalah energi bersih. Lihat, langit kota kembali berwarna biru!";
+                    btn.innerText = "Lanjut Misi 2";
+                    btn.className = "w-full py-4 rounded-2xl font-bold text-white bg-blue-600 shadow-[0_0_20px_rgba(37,99,235,0.4)]";
+                } else {
+                    icon.innerText = "❌";
+                    title.innerText = "GAGAL";
+                    desc.innerText = "Energi yang kamu pilih masih mengeluarkan asap kotor. Kota tetap gelap karena polusi.";
+                    btn.innerText = "Coba Lagi";
+                    btn.className = "w-full py-4 rounded-2xl font-bold text-white bg-red-600";
+                }
+            } else {
+                // Misi 2: Mencari Energi Tak Terbarukan (Terbatas)
+                if (selectedEnergy.includes('coal') && selectedEnergy.includes('oil')) {
+                    icon.innerText = "🎯";
+                    title.innerText = "ANALISIS TEPAT";
+                    desc.innerText = `Benar sekali Ilmuwan ${studentData.name.toUpperCase()}! Batu Bara dan Minyak Bumi adalah energi tak terbarukan yang suatu saat pasti akan habis. Kita harus waspada!`;
+                    btn.innerText = "Selesaikan Misi";
+                    btn.className = "w-full py-4 rounded-2xl font-bold text-white bg-green-600 shadow-[0_0_20px_rgba(22,163,74,0.4)]";
+                } else {
+                    icon.innerText = "⚠️";
+                    title.innerText = "DATA SALAH";
+                    desc.innerText = "Kamu mencampurnya dengan energi terbarukan. Ingat, misi kali ini adalah mencari sumber energi yang jumlahnya terbatas di bumi.";
+                    btn.innerText = "Analisis Ulang";
+                    btn.className = "w-full py-4 rounded-2xl font-bold text-white bg-orange-600";
+                }
+            }
+            modal.classList.remove('hidden');
+        }
+
+        function handleModalAction() {
+            const title = document.getElementById('result-title').innerText;
+            const modal = document.getElementById('modal-result');
+            if (title === "BERHASIL") {
+                currentMission = 2;
+                modal.classList.add('hidden');
+                setupMission2();
+            } else if (title === "ANALISIS TEPAT") {
+                location.reload();
+            } else {
+                modal.classList.add('hidden');
+                resetMission();
+            }
+        }
+
+        function setupMission2() {
+            document.getElementById('mission-title').innerText = "Misi 2: Energi Terbatas";
+            document.getElementById('mission-instruction').innerText = "Waspada! Identifikasi 2 sumber energi **TAK TERBARUKAN** yang jumlahnya terbatas dan akan habis jika dipakai terus.";
+            document.getElementById('step-2-dot').classList.add('progress-active', 'shadow-[0_0_15px_rgba(59,130,246,0.5)]');
+            document.getElementById('step-2-dot').classList.remove('text-slate-600');
+            document.getElementById('step-2-dot').style.color = "white";
+            resetMission();
+        }
+
+        function resetMission() {
+            selectedEnergy = [];
+            document.querySelectorAll('.choice-btn').forEach(btn => {
+                btn.classList.remove('border-blue-500', 'bg-blue-900/30', 'shadow-[0_0_20px_rgba(59,130,246,0.3)]');
+            });
+            updateCityVisual();
+        }
+    </script>
+</body>
+</html>
